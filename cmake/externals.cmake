@@ -203,7 +203,7 @@ macro(drake_add_cmake_external PROJECT)
   endif()
 
   if(_ext_QT)
-    find_package(Qt 4.8 REQUIRED)
+    find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
     list(APPEND _ext_PROPAGATE_CACHE_VARS QT_QMAKE_EXECUTABLE)
   endif()
 
