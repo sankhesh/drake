@@ -18,7 +18,7 @@
 	url = https://github.com/RobotLocomotion/spotless-pod.git
 [submodule "externals/director"]
 	path = externals/director
-	url = https://github.com/RobotLocomotion/director.git
+	url = https://github.com/sankhesh/director.git
 [submodule "externals/signalscope"]
 	path = externals/signalscope
 	url = https://github.com/mitdrc/signal-scope.git
@@ -88,13 +88,13 @@
 	url = https://github.com/flexible-collision-library/fcl.git
 [submodule "externals/pythonqt"]
 	path = externals/pythonqt
-	url = https://github.com/commontk/PythonQt.git
+	url = https://github.com/patmarion/PythonQt.git
 [submodule "externals/ctk_python_console"]
 	path = externals/ctk_python_console
-	url = https://github.com/patmarion/ctkPythonConsole
+	url = https://github.com/mwoehlke-kitware/ctkPythonConsole
 [submodule "externals/qt_property_browser"]
 	path = externals/qt_property_browser
-	url = https://github.com/patmarion/QtPropertyBrowser
+	url = https://github.com/intbots/QtPropertyBrowser
 [submodule "externals/tinyobjloader"]
 	path = externals/tinyobjloader
 	url = https://github.com/syoyo/tinyobjloader
