@@ -37,5 +37,3 @@ Many of the features also use
 * System Identification Toolbox
 
 You can check your current MATLAB installation using MATLAB's ``ver`` command.
-
-
