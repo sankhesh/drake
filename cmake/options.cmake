@@ -256,8 +256,8 @@ macro(drake_setup_options)
     "robotlocomotion LCM types")
 
   drake_system_dependency(
-    VTK OPTIONAL PREFER_SYSTEM_VERSION REQUIRES VTK VERSION 5.10
-    ADDITIONAL_VERSIONS 5.8 --
+    VTK OPTIONAL PREFER_SYSTEM_VERSION REQUIRES VTK VERSION 8.0
+    ADDITIONAL_VERSIONS 7.1 --
     "Visualization ToolKit")
 
   drake_system_dependency(
