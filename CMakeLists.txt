@@ -371,6 +371,7 @@ drake_add_external(director PUBLIC CMAKE TEST PYTHON QT VTK
     -DUSE_LCMGL=${HAVE_LIBBOT}
     -DUSE_LIBBOT=OFF
     -DENABLE_TESTING=ON
+    -DDD_QT_VERSION:STRING=${DESIRED_QT_VERSION}
   DEPENDS
     bot_core_lcmtypes
     ctk_python_console

@@ -12,6 +12,17 @@ else()
 endif()
 
 #------------------------------------------------------------------------------
+# Setup the version of Qt to be used for all Qt requiring external projects
+#------------------------------------------------------------------------------
+set(DESIRED_QT_VERSION "5" CACHE STRING "Expected Qt version")
+
+set_property(CACHE DESIRED_QT_VERSION PROPERTY STRINGS 4 5)
+
+if(NOT (DESIRED_QT_VERSION VERSION_EQUAL "4" OR DESIRED_QT_VERSION VERSION_EQUAL "5"))
+  message(FATAL_ERROR "Expected value for DESIRED_QT_VERSION is either '4' or '5'")
+endif()
+
+#------------------------------------------------------------------------------
 # Initialize a submodule and set the commands to download and update the same.
 #------------------------------------------------------------------------------
 function(drake_add_submodule PATH DOWNLOAD_COMMAND_VAR UPDATE_COMMAND_VAR)
@@ -206,8 +217,18 @@ macro(drake_add_cmake_external PROJECT)
   endif()
 
   if(_ext_QT)
-    find_package(Qt 4.8 REQUIRED)
-    list(APPEND _ext_PROPAGATE_CACHE_VARS QT_QMAKE_EXECUTABLE)
+    if(${DESIRED_QT_VERSION} VERSION_GREATER "4")
+      find_package(Qt5 REQUIRED Core Gui Widgets OpenGL)
+      list(APPEND _ext_PROPAGATE_CACHE_VARS
+        Qt5Core_DIR
+        Qt5Gui_DIR
+        Qt5Widgets_DIR
+        Qt5OpenGL_DIR)
+    else()
+      find_package(Qt4 REQUIRED QtCore QtGui QtOpenGL QtScript)
+      include(${QT_USE_FILE})
+      list(APPEND _ext_PROPAGATE_CACHE_VARS QT_QMAKE_EXECUTABLE)
+    endif()
   endif()
 
   if(_ext_VTK AND USE_SYSTEM_VTK)
