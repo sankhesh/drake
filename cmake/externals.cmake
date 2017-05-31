@@ -220,6 +220,7 @@ macro(drake_add_cmake_external PROJECT)
     if(${DESIRED_QT_VERSION} VERSION_GREATER "4")
       find_package(Qt5 REQUIRED Core Gui Widgets OpenGL)
       list(APPEND _ext_PROPAGATE_CACHE_VARS
+        Qt5_DIR
         Qt5Core_DIR
         Qt5Gui_DIR
         Qt5Widgets_DIR
