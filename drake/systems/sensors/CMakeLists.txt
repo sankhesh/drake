@@ -50,7 +50,7 @@ target_link_libraries(drakeSensors
     ${drakeSensors_TARGET_LINK_LIBRARIES})
 
 if(VTK_FOUND)
-  target_link_libraries(drakeSensors drakeRendering vtkIO vtkRendering)
+  target_link_libraries(drakeSensors drakeRendering ${VTK_LIBRARIES})
   target_include_directories(drakeSensors PUBLIC ${VTK_INCLUDE_DIRS})
 endif()
 
