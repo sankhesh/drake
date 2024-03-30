@@ -1,19 +1,8 @@
-/*=========================================================================
-
-  Program:   Visualization Toolkit
-  Module:    vtkRenderingOpenGL2ObjectFactory.cxx
-
-  Copyright (c) Ken Martin, Will Schroeder, Bill Lorensen
-  All rights reserved.
-  See Copyright.txt or http://www.kitware.com/Copyright.htm for details.
-
-     This software is distributed WITHOUT ANY WARRANTY; without even
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-     PURPOSE.  See the above copyright notice for more information.
-
-=========================================================================*/
+// SPDX-FileCopyrightText: Copyright (c) Ken Martin, Will Schroeder, Bill Lorensen
+// SPDX-License-Identifier: BSD-3-Clause
 
 // Object factories should never have deprecation warnings.
+// NOLINTNEXTLINE(modernize-macro-to-enum)
 #define VTK_DEPRECATION_LEVEL 0
 
 #include "vtkRenderingOpenGLConfigure.h"   // Added this line for Drake.
@@ -23,6 +12,7 @@
 // Include all of the classes we want to create overrides for.
 #include "vtkDummyGPUInfoList.h"
 #include "vtkOpenGLActor.h"
+#include "vtkOpenGLCompositePolyDataMapperDelegator.h"
 #include "vtkOpenGLBillboardTextActor3D.h"
 #include "vtkOpenGLCamera.h"
 #include "vtkOpenGLLabeledContourMapper.h"
@@ -65,6 +55,7 @@ vtkStandardNewMacro(vtkRenderingOpenGL2ObjectFactory);
 // Now create the functions to create overrides with.
 VTK_CREATE_CREATE_FUNCTION(vtkDummyGPUInfoList)
 VTK_CREATE_CREATE_FUNCTION(vtkOpenGLActor)
+VTK_CREATE_CREATE_FUNCTION(vtkOpenGLCompositePolyDataMapperDelegator)
 VTK_CREATE_CREATE_FUNCTION(vtkOpenGLBillboardTextActor3D)
 VTK_CREATE_CREATE_FUNCTION(vtkOpenGLCamera)
 VTK_CREATE_CREATE_FUNCTION(vtkOpenGLLabeledContourMapper)
@@ -103,6 +94,7 @@ vtkRenderingOpenGL2ObjectFactory::vtkRenderingOpenGL2ObjectFactory()
 {
 this->RegisterOverride("vtkGPUInfoList", "vtkDummyGPUInfoList", "Override for VTK::RenderingOpenGL2 module", 1, vtkObjectFactoryCreatevtkDummyGPUInfoList);
 this->RegisterOverride("vtkActor", "vtkOpenGLActor", "Override for VTK::RenderingOpenGL2 module", 1, vtkObjectFactoryCreatevtkOpenGLActor);
+this->RegisterOverride("vtkCompositePolyDataMapperDelegator", "vtkOpenGLCompositePolyDataMapperDelegator", "Override for VTK::RenderingOpenGL2 module", 1, vtkObjectFactoryCreatevtkOpenGLCompositePolyDataMapperDelegator);
 this->RegisterOverride("vtkBillboardTextActor3D", "vtkOpenGLBillboardTextActor3D", "Override for VTK::RenderingOpenGL2 module", 1, vtkObjectFactoryCreatevtkOpenGLBillboardTextActor3D);
 this->RegisterOverride("vtkCamera", "vtkOpenGLCamera", "Override for VTK::RenderingOpenGL2 module", 1, vtkObjectFactoryCreatevtkOpenGLCamera);
 this->RegisterOverride("vtkLabeledContourMapper", "vtkOpenGLLabeledContourMapper", "Override for VTK::RenderingOpenGL2 module", 1, vtkObjectFactoryCreatevtkOpenGLLabeledContourMapper);
