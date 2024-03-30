@@ -53,8 +53,9 @@
 #endif
 
 // This stanza is customized for Drake.
-#ifdef VTK_USE_X
-#include "vtkXOpenGLRenderWindow.h"
+#if 1
+#include "vtkEGLRenderWindow.h"
+// #include "vtkXOpenGLRenderWindow.h"
 #endif
 
 
@@ -95,8 +96,9 @@ VTK_CREATE_CREATE_FUNCTION(vtkCocoaRenderWindow)
 #endif
 
 // This stanza is customized for Drake.
-#ifdef VTK_USE_X
-VTK_CREATE_CREATE_FUNCTION(vtkXOpenGLRenderWindow)
+#if 1
+VTK_CREATE_CREATE_FUNCTION(vtkEGLRenderWindow)
+// VTK_CREATE_CREATE_FUNCTION(vtkXOpenGLRenderWindow)
 #endif
 
 vtkRenderingOpenGL2ObjectFactory::vtkRenderingOpenGL2ObjectFactory()
@@ -133,8 +135,9 @@ this->RegisterOverride("vtkRenderWindow", "vtkCocoaRenderWindow", "Override for 
 #endif
 
 // This stanza is customized for Drake.
-#ifdef VTK_USE_X
-this->RegisterOverride("vtkRenderWindow", "vtkXOpenGLRenderWindow", "Override for VTK::RenderingOpenGL2 module", 1, vtkObjectFactoryCreatevtkXOpenGLRenderWindow);
+#if 1
+// this->RegisterOverride("vtkRenderWindow", "vtkXOpenGLRenderWindow", "Override for VTK::RenderingOpenGL2 module", 1, vtkObjectFactoryCreatevtkXOpenGLRenderWindow);
+this->RegisterOverride("vtkRenderWindow", "vtkEGLRenderWindow", "Override for VTK::RenderingOpenGL2 module", 1, vtkObjectFactoryCreatevtkEGLRenderWindow);
 #endif
 }
 
