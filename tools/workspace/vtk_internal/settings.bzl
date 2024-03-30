@@ -441,22 +441,21 @@ MODULE_SETTINGS = {
                 "VTK_USE_COCOA",
             ],
             "//conditions:default": [
-                "VTK_USE_X",
+                "VTK_OPENGL_HAS_EGL",
             ],
         }),
         "cmake_undefines": [
             "VTK_DEFAULT_RENDER_WINDOW_OFFSCREEN",
             "VTK_OPENGL_ENABLE_STREAM_ANNOTATIONS",
-            "VTK_OPENGL_HAS_EGL",
             "VTK_OPENGL_HAS_OSMESA",
             "VTK_REPORT_OPENGL_ERRORS",
             "VTK_REPORT_OPENGL_ERRORS_IN_RELEASE_BUILDS",
             "VTK_USE_CORE_GRAPHICS",
             "VTK_USE_DIRECTX",
             "VTK_USE_NVCONTROL",
+            "VTK_USE_X",
         ] + select({
             ":osx": [
-                "VTK_USE_X",
             ],
             "//conditions:default": [
                 "VTK_USE_COCOA",
@@ -473,7 +472,6 @@ MODULE_SETTINGS = {
             # Exclude all renderers by default; we'll incorporate the necessary
             # ones using with srcs_extra immediately below.
             "**/vtkCocoa*",
-            "**/vtkEGL*",
             "**/vtkOSOpenGL*",
             "**/vtkSDL2OpenGL*",
             "**/vtkWin32OpenGL*",
@@ -498,12 +496,18 @@ MODULE_SETTINGS = {
             "@drake//tools/workspace/vtk_internal:gen/vtkRenderingOpenGL2ObjectFactory.h",  # noqa
             "@drake//tools/workspace/vtk_internal:gen/vtkRenderingOpenGL2ObjectFactory.cxx",  # noqa
         ],
+        "copts_extra": [
+            "-DVTK_DEFAULT_EGL_DEVICE_INDEX=0",
+        ],
         "linkopts_extra": select({
             ":osx": [
                 # Mimic vtk_module_link(... "-framework Cocoa") from upstream.
                 "-framework Cocoa",
             ],
-            "//conditions:default": [],
+            "//conditions:default": [
+                # XXX
+                "-lEGL",
+            ],
         }),
         "deps_extra": select({
             ":osx": [],
@@ -621,6 +625,7 @@ MODULE_SETTINGS = {
             "-Iexternal/vtk_internal/ThirdParty/glew/vtkglew/include",
             # Match the target_compile_definitions() from CMakeLists.txt.
             "-DGLEW_NO_GLU",
+            "-DGLEW_EGL",
         ],
         "linkopts_extra": select({
             ":osx": [],
